@@ -3,18 +3,30 @@
 function create(type) {
   switch (type) {
     case 'Snake': {    
-      return {
+      const snake = {
         tail: [{ x: 100, y: 100 }],
         direction: EDirection.NONE,
         __type: 'Snake',
+        getHead: () => {
+          console.log(snake);
+          return snake.tail[0];
+        },
       };
+
+      return snake;
     }
-    case 'Food': {    
-      return {
+    case 'Food': {
+      const food = {
         x: randomX(),
         y: randomY(),
+        __size: 10,
         __type: 'Food',
+        getSize: () => {
+          return food.__size;
+        }
       };
+
+      return food;
     }
   }
 }
@@ -92,20 +104,34 @@ function updateView() {
   drawFood(context, food);
 }
 
-function checkFoodCollision(snake, food) {
-  const { tail } = snake;
-
-  const [head] = tail;
-
-  if (head.x === food.x && head.y === food.y) {
-    console.log('Detected food collision');
-    return true;
-  } else {
-    return false;
-  }
+function checkFoodCollision() {
+  const head = snake.getHead();
+  
+  return Math.abs(head.x - food.x) < food.getSize()
+    && Math.abs(head.y - food.y) < food.getSize();
 }
 
-function checkSelfCollision(snake) {
+function checkWallCollision(nextPoint) {
+  let x = nextPoint.x;
+  let y = nextPoint.y;
+
+  if (nextPoint.x === 0) {
+    // hit left wall, so move right
+    x = WIDTH;
+  } else if (nextPoint === WIDTH) {
+    // hit right wall, so move left
+    x = 0;
+  } else if (nextPoint.y === 0) {
+    // hit top wall, so move down
+    y = HEIGHT;
+  } else if (nextPoint.y === HEIGHT) {
+    y = 0;
+  }
+
+  return { x, y };
+}
+
+function checkSelfCollision() {
   const { tail } = snake;
 
   const [head] = tail;
@@ -113,36 +139,45 @@ function checkSelfCollision(snake) {
   for (let i = 1; i < tail.length; i++) {
     const segment = tail[i];
 
-    if (head.x === segment.x && head.y === segment.y) {
-
-      snake.direction = EDirection.NONE;
-      dx = 0;
-      dy = 0;
-
-      return true;
-    }
+    if (head.x === segment.x && head.y === segment.y) {}
   }
 
   return false;
 }
 
+function getNextPoint() {
+  const head = snake.getHead();
 
-
-function moveSnake(snake) {
-  const { tail, direction } = snake;
-
-  const [head] = tail;
-
-  const nextPosition = {
+  return {
     x: head.x + dx,
     y: head.y + dy,
   };
+}
 
-  checkSelfCollision(snake);
-  checkFoodCollision(snake, food);
 
-  tail.unshift(nextPosition);
-  tail.pop();
+
+function moveSnake(snake) {
+  let nextPosition = getNextPoint();
+
+  if (checkSelfCollision()) {
+      snake.direction = EDirection.NONE;
+      dx = 0;
+      dy = 0;
+      return;
+  }
+
+  const p = checkWallCollision(nextPosition);
+  if (p) {
+    nextPosition = p;
+  }
+
+  if (checkFoodCollision()) {
+    snake.tail.unshift(nextPosition);
+    food = create('Food');
+  } else {
+    snake.tail.unshift(nextPosition);
+    snake.tail.pop();
+  }
 }
 
 function randomX() {
