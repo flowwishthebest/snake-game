@@ -1,4 +1,74 @@
-// flowwishthebest
+// @flow
+
+import { EDirection } from './directions';
+import { EKeyCode } from './key-codes';
+
+// Board
+
+class Game {
+  // config
+  // elements
+  // Board.add() Layer
+  __board;
+
+  constructor() {
+    this.__board = new Board();
+  }
+
+  // Cells[][]
+}
+
+class Render {
+  constructor() {
+    
+  }
+
+  render() {
+    // for cell .draw();
+  }
+}
+
+class Board {
+  
+}
+
+const ECellType = {
+  SNAKE_SE: '',
+};
+
+class Cell {
+  constructor(type) {
+
+  }
+}
+
+class Snake {
+
+}
+
+class Wall {
+
+}
+
+class Maze {
+  constructor() {
+    const maze = [new Wall()];
+  }
+}
+
+class Render {
+  constructor() {
+    const cell = new Cell();
+
+    if (cell.type === 'SnakePart') {
+      
+    }
+  }
+}
+
+class Game {
+  constructor() {}
+}
 
 function create(type) {
   switch (type) {
@@ -68,20 +138,6 @@ function drawFood(context, food) {
   drawRect(context, food.x, food.y, 10, 10, '#000', true);
 }
 
-const EDirection = {
-  NONE: 0,
-  LEFT: 1,
-  RIGHT: 2,
-  UP: 3,
-  DOWN: 4,
-};
-
-const EKeyCode = {
-  ARROW_UP: 38,
-  ARROW_DOWN: 40,
-  ARROW_LEFT: 37,
-  ARROW_RIGHT: 39,
-}
 
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
