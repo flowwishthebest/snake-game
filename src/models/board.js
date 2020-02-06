@@ -1,21 +1,22 @@
 // @flow
+
 import { Cell } from './cell';
 
 export class Board {
 
-    _width: Number;
-    _height: Number;
+    _width: number;
+    _height: number;
 
-    constructor(width: Number, height: Number) {
+    constructor(width: number, height: number) {
         this._width = width;
         this._height = height;
     }
 
-    getWidth(): Number {
+    getWidth(): number {
         return this._width;
     }
 
-    getHeight(): Number {
+    getHeight(): number {
         return this._height;
     }
 }

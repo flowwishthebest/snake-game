@@ -6,6 +6,11 @@ export const GameState = Object.freeze({
     RUNNING: 2,
 });
 
+const GameConfig = {
+    BoardWidth: 1000,
+    BoardHeight: 1000,
+};
+
 export class Game {
     _state: $Values<typeof GameState>;
 

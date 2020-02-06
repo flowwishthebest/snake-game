@@ -1,28 +1,28 @@
-import { Point } from "./point";
-
 // @flow
 
-export const CellType = {
-    FOOD: 1,
-    SNAKE_HEAD: 2,
-    SNAKE_SEGMENT: 3,
-    WALL: 4,
-};
+import { Point } from "./point";
+import type { ECellType } from "./cell-type";
 
 export class Cell {
 
     _point: Point;
-    _type: $Values<CellType>;
+    _type: ECellType;
     _size: Number;
 
-    constructor(point: Point, type: $Values<CellType>, size: Number) {
+    constructor(point: Point, type: ECellType, size: Number) {
         this._point = point;
         this._type = type;
         this._size = size;
     }
 
-    getType(): $Values<CellType> {
+    getType(): ECellType {
         return this._type;
+    }
+
+    setType(type: ECellType): this {
+        this._type = type;
+
+        return this;
     }
 
     getPoint(): Point {

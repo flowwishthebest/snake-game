@@ -1,19 +1,19 @@
 // @flow
 
 import { Point } from "./point";
-import { EDirection } from '../directions';
+import type { EDirection } from './direction-type';
 
 export class Snake {
 
     _head: Point;
     _initialSize: Number;
-    _direction: $Values<EDirection>;
+    _direction: EDirection;
     _tail: Array<Point>;
 
     constructor(
         head: Point,
         initialSize: Number,
-        direction: $Values<EDirection>,
+        direction: EDirection,
     ) {
         this._head = head;
         this._initialSize = initialSize;

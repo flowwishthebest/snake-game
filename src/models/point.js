@@ -1,19 +1,21 @@
 // @flow
 
+// smalles pieces of logic
 export class Point {
-    _x: Number;
-    _y: Number;
 
-    constructor(x: Number, y: Number) {
+    _x: number;
+    _y: number;
+
+    constructor(x: number, y: number) {
         this._x = x;
         this._y = y;
     }
 
-    getX(): Number {
+    getX(): number {
         return this._x;
     }
 
-    getY(): Number {
+    getY(): number {
         return this._y;
     }
 }
