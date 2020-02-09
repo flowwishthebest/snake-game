@@ -1,6 +1,6 @@
 // @flow
 
-import { Cell } from './cell';
+import { Cell } from './cell.model';
 
 export class Board {
 

@@ -1,7 +1,7 @@
 // @flow
 
-import { Point } from "./point";
-import type { EDirection } from './direction-type';
+import { Point } from "./point.model";
+import type { EDirection } from '../types';
 
 export class Snake {
 

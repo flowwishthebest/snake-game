@@ -1,7 +1,7 @@
 // @flow
 
-import { Point } from "./point";
-import type { ECellType } from "./cell-type";
+import { Point } from './point.model';
+import type { ECellType } from '../types';
 
 export class Cell {
 
